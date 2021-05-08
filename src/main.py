@@ -15,19 +15,10 @@ def handle_quit(events):
             exit(0)
 
 
-def main():
-    # Init
-    pygame.display.init()
-    pygame.display.set_caption("TOTAL BREAKOUT")
-    window = pygame.display.set_mode((1000, 800))
-    info = pygame.display.Info()
-
-    # Objects instanciation
-    player = Player(info.current_w, info.current_h)
-    ball = Ball(info.current_w, info.current_h)
-
-    # Start screen
-    pygame.font.init()
+def start_screen(window, info):
+    """
+    Display starting screen
+    """
     myfont = pygame.font.SysFont("Comic Sans MS", 60)
     textsurface = myfont.render("PRESS SPACE", True, (255, 255, 255))
     window.blit(
@@ -47,6 +38,22 @@ def main():
         # Start game if SPACE is pressed
         if keys[pygame.K_SPACE]:
             break
+
+
+def main():
+    # Init
+    pygame.display.init()
+    pygame.font.init()
+    pygame.display.set_caption("TOTAL BREAKOUT")
+    window = pygame.display.set_mode((1000, 800))
+    info = pygame.display.Info()
+
+    # Objects instanciation
+    player = Player(info.current_w, info.current_h)
+    ball = Ball(info.current_w, info.current_h)
+
+    # Start screen
+    start_screen(window, info)
 
     # Game main loop
     clock = Clock()

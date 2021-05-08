@@ -4,6 +4,7 @@ from pygame.locals import QUIT
 from pygame.time import Clock
 
 from Ball import Ball
+from Block import Block
 from Player import Player
 
 
@@ -78,6 +79,7 @@ def main():
     # Objects instanciation
     player = Player(info.current_w, info.current_h)
     ball = Ball(info.current_w, info.current_h)
+    block = Block(info.current_w, info.current_h)
 
     # Start screen
     start_screen(window, info)
@@ -103,10 +105,11 @@ def main():
         player.move(keys, dt)
 
         # Ball update
-        game_over = ball.move(player, dt)
+        game_over = ball.move(player, block, dt)
 
         # Draw
         window.fill((0, 0, 0))
+        block.draw(window)
         player.draw(window)
         ball.draw(window)
         pygame.display.flip()

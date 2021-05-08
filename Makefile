@@ -1,7 +1,8 @@
 OBJS = \
 	   src/main.py \
 	   src/Player.py \
-	   src/Ball.py
+	   src/Ball.py \
+	   src/Block.py
 BIN = src/main.py
 
 

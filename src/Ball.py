@@ -34,7 +34,7 @@ class Ball:
         self.rect.left = self.screen_W // 2 - self.WIDTH // 2
         self.direction = Vector2(0, 1)
 
-    def move(self, player, block, dt):
+    def move(self, player, blocks, dt):
         """
         Collision check to update direction, and update self.rect accordingly
         """
@@ -51,39 +51,41 @@ class Ball:
             self.direction.x = coeff * 1.5
 
         # Block collision
-        if self.rect.colliderect(block.rect):
-            new_direction = self.direction
+        for block in blocks:
+            if self.rect.colliderect(block):
+                new_direction = self.direction
 
-            # Vertical
-            if (
-                block.rect.left
-                < self.rect.left + self.radius
-                < block.rect.left + block.rect.width
-            ):
-                # Bottom collision
-                if block.rect.top + block.rect.height * 4 / 5 < self.rect.top:
-                    new_direction = Vector2(0, 1)
+                # Vertical
+                if (
+                    block.rect.left
+                    < self.rect.left + self.radius
+                    < block.rect.left + block.rect.width
+                ):
+                    # Bottom collision
+                    if block.rect.top + block.rect.height * 4 / 5 < self.rect.top:
+                        new_direction = Vector2(0, 1)
 
-                # Top collision
-                else:
-                    new_direction = Vector2(0, -1)
+                    # Top collision
+                    else:
+                        print("TOP COLLISION")
+                        new_direction = Vector2(0, -1)
 
-            # Horizontal
-            if (
-                block.rect.top
-                < self.rect.top + self.radius
-                < block.rect.top + block.rect.height
-            ):
-                # Right collision
-                if block.rect.left + block.rect.width * 4 / 5 < self.rect.left:
-                    new_direction = Vector2(1, 0)
+                # Horizontal
+                if (
+                    block.rect.top
+                    < self.rect.top + self.radius
+                    < block.rect.top + block.rect.height
+                ):
+                    # Right collision
+                    if block.rect.left + block.rect.width * 4 / 5 < self.rect.left:
+                        new_direction = Vector2(1, 0)
 
-                # Left collision
-                else:
-                    new_direction = Vector2(-1, 0)
+                    # Left collision
+                    else:
+                        new_direction = Vector2(-1, 0)
 
-            self.direction = 2 * new_direction + self.direction
-            block.remove()
+                self.direction = 2 * new_direction + self.direction
+                block.remove()
 
         # Top wall collision check
         if self.rect.top < 1:

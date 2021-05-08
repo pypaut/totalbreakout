@@ -82,7 +82,22 @@ def main():
     # Objects instanciation
     player = Player(info.current_w, info.current_h)
     ball = Ball(info.current_w, info.current_h)
-    block = Block(info.current_w, info.current_h)
+    blocks = []
+
+    left_len = 10
+    top_len = 5
+    ext_block_size = info.current_w // left_len
+    block_size = info.current_w // 40
+    for i in range(left_len):
+        for j in range(top_len):
+            new_block = Block(
+                block_size,
+                i * ext_block_size,
+                j * ext_block_size,
+                info.current_w,
+                info.current_h,
+            )
+            blocks.append(new_block)
 
     # Start screen
     start_screen(window, info)
@@ -108,11 +123,12 @@ def main():
         player.move(keys, dt)
 
         # Ball update
-        game_over = ball.move(player, block, dt)
+        game_over = ball.move(player, blocks, dt)
 
         # Draw
         window.fill((0, 0, 0))
-        block.draw(window)
+        for block in blocks:
+            block.draw(window)
         player.draw(window)
         ball.draw(window)
         pygame.display.flip()

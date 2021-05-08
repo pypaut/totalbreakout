@@ -9,27 +9,38 @@ class Ball:
         """
         Ball instanciation
         """
-        HEIGHT = screen_H // 100  # Player height
-        WIDTH = HEIGHT  # Ball width
+        self.HEIGHT = screen_H // 100  # Player height
+        self.WIDTH = self.HEIGHT  # Ball width
 
         self.screen_W = screen_W
         self.screen_H = screen_H
 
         self.rect = Rect(
-            screen_W // 2 - WIDTH // 2,  # Horizontal position
-            screen_H // 2 - HEIGHT // 2,  # Vertical position
-            WIDTH,  # Width
-            HEIGHT,  # Height
+            screen_W // 2 - self.WIDTH // 2,  # left
+            screen_H // 2 - self.HEIGHT // 2,  # top
+            self.WIDTH,  # width
+            self.HEIGHT,  # hHeight
         )
 
-        self.radius = HEIGHT // 2
+        self.radius = self.HEIGHT // 2
         self.direction = Vector2(0, 1)
         self.speed = 0.2
+
+    def reset_pos(self):
+        """
+        Reset ball position to beginning
+        """
+        self.rect.top = self.screen_H // 2 - self.HEIGHT // 2
+        self.rect.left = self.screen_W // 2 - self.WIDTH // 2
 
     def move(self, player, dt):
         """
         Collision check to update direction, and update self.rect accordingly
         """
+        # Bottom wall collision detection : game over
+        if self.rect.top + self.rect.height > self.screen_H:
+            return True
+
         # Player collision check
         if self.rect.colliderect(player.rect):
             ball_center = self.rect.left + self.radius

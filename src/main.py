@@ -40,6 +40,33 @@ def start_screen(window, info):
             break
 
 
+def gameover_screen(window, info):
+    """
+    Display game over screen
+    """
+    myfont = pygame.font.SysFont("Comic Sans MS", 60)
+    textsurface = myfont.render(
+        "GAME OVER ... PRESS SPACE", True, (255, 255, 255)
+    )
+    window.blit(
+        textsurface,
+        (info.current_w / 2 - textsurface.get_width() / 2, info.current_h / 2),
+    )
+    pygame.display.flip()
+
+    # Wait for user to start game
+    while True:
+        # Get keyboard events
+        keys = pygame.key.get_pressed()
+
+        # Handle quit event
+        handle_quit(pygame.event.get())
+
+        # Start game if SPACE is pressed
+        if keys[pygame.K_SPACE]:
+            break
+
+
 def main():
     # Init
     pygame.display.init()
@@ -60,6 +87,11 @@ def main():
     is_running = True
     game_over = False
     while is_running:
+        if game_over:
+            gameover_screen(window, info)
+            ball.reset_pos()
+            game_over = False
+
         # Get keyboard events
         keys = pygame.key.get_pressed()
 

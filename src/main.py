@@ -41,7 +41,7 @@ def start_screen(window, info):
             break
 
 
-def gameover_screen(window, info):
+def gameover_screen(window, info, clock):
     """
     Display game over screen
     """
@@ -57,6 +57,9 @@ def gameover_screen(window, info):
 
     # Wait for user to start game
     while True:
+        # Clock ticks
+        clock.tick(60)
+
         # Get keyboard events
         keys = pygame.key.get_pressed()
 
@@ -90,7 +93,7 @@ def main():
     game_over = False
     while is_running:
         if game_over:
-            gameover_screen(window, info)
+            gameover_screen(window, info, clock)
             ball.reset_pos()
             game_over = False
 

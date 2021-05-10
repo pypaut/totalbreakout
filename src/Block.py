@@ -8,12 +8,7 @@ class Block:
         """
         Block instanciation
         """
-        self.rect = Rect(
-            left,
-            top,
-            size,
-            size
-        )
+        self.rect = Rect(left, top, size, size)
 
     def remove(self):
         self.rect = Rect(0, 0, 0, 0)

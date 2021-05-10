@@ -125,7 +125,7 @@ class Ball:
                     new_direction = Vector2(1, 1).normalize()
 
                 self.direction = 2 * new_direction + self.direction
-                block.remove()
+                blocks.remove(block)
 
         # Top wall collision check
         if self.rect.top < 1:

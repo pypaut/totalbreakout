@@ -48,6 +48,22 @@ def start_screen(window, info, clock):
     wait(clock)
 
 
+def win_screen(window, info, clock):
+    """
+    Display winning screen
+    """
+    myfont = pygame.font.SysFont("Comic Sans MS", 60)
+    textsurface = myfont.render("YOU WIN! ... PRESS SPACE TO RESTART", True, (255, 255, 255))
+    window.blit(
+        textsurface,
+        (info.current_w / 2 - textsurface.get_width() / 2, info.current_h / 2),
+    )
+    pygame.display.flip()
+
+    # Wait for user to start game
+    wait(clock)
+
+
 def gameover_screen(window, info, clock):
     """
     Display game over screen
@@ -118,6 +134,10 @@ def main():
 
         # Ball update
         game_over = ball.move(player, blocks, dt)
+
+        # Check if win
+        if len(blocks) == 0:
+            win_screen(window, info, clock)
 
         # Draw
         window.fill((0, 0, 0))

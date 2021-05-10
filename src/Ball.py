@@ -26,6 +26,12 @@ class Ball:
         self.direction = Vector2(0, 1)
         self.speed = 0.2
 
+    def get_center(self):
+        """
+        Return graphical (x, y) center of the ball
+        """
+        return (self.rect.left + self.radius, self.rect.top + self.radius)
+
     def reset_pos(self):
         """
         Reset ball position to beginning
@@ -62,7 +68,10 @@ class Ball:
                     < block.rect.left + block.rect.width
                 ):
                     # Bottom collision
-                    if block.rect.top + block.rect.height * 4 / 5 < self.rect.top:
+                    if (
+                        block.rect.top + block.rect.height * 4 / 5
+                        < self.rect.top
+                    ):
                         new_direction = Vector2(0, 1)
 
                     # Top collision
@@ -71,18 +80,49 @@ class Ball:
                         new_direction = Vector2(0, -1)
 
                 # Horizontal
-                if (
+                elif (
                     block.rect.top
                     < self.rect.top + self.radius
                     < block.rect.top + block.rect.height
                 ):
                     # Right collision
-                    if block.rect.left + block.rect.width * 4 / 5 < self.rect.left:
+                    if (
+                        block.rect.left + block.rect.width * 4 / 5
+                        < self.rect.left
+                    ):
                         new_direction = Vector2(1, 0)
 
                     # Left collision
                     else:
                         new_direction = Vector2(-1, 0)
+
+                # Top left corner
+                elif (
+                    self.get_center()[0] <= block.rect.left
+                    and self.get_center()[1] <= block.rect.top
+                ):
+                    new_direction = Vector2(-1, -1).normalize()
+
+                # Top right corner
+                elif (
+                    block.rect.left + block.rect.width <= self.get_center()[0]
+                    and self.get_center()[1] <= block.rect.top
+                ):
+                    new_direction = Vector2(1, -1).normalize()
+
+                # Bottom left corner
+                elif (
+                    self.get_center()[0] <= block.rect.left
+                    and block.rect.top + block.rect.height <= self.get_center()[1]
+                ):
+                    new_direction = Vector2(-1, 1).normalize()
+
+                # Bottom right corner
+                elif (
+                    block.rect.left + block.rect.width <= self.get_center()[0]
+                    and block.rect.top + block.rect.height <= self.get_center()[1]
+                ):
+                    new_direction = Vector2(1, 1).normalize()
 
                 self.direction = 2 * new_direction + self.direction
                 block.remove()

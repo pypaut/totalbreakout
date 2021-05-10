@@ -5,6 +5,7 @@
 
 # Features
 
+[ ] - End screen
 [ ] - Start menu
 [ ] - Pause menu
 [ ] - Game over menu

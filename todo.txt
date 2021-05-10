@@ -1,0 +1,13 @@
+# Bugs
+
+[ ] - Fix block collision at corners
+[ ] - Fix blocks placement
+
+# Features
+
+[ ] - Start menu
+[ ] - Pause menu
+[ ] - Game over menu
+[ ] - Countdown before start
+[ ] - Sound
+[ ] - VFX

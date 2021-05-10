@@ -16,7 +16,23 @@ def handle_quit(events):
             exit(0)
 
 
-def start_screen(window, info):
+def wait(clock):
+    while True:
+        # Clock ticks
+        clock.tick(60)
+
+        # Get keyboard events
+        keys = pygame.key.get_pressed()
+
+        # Handle quit event
+        handle_quit(pygame.event.get())
+
+        # Start game if SPACE is pressed
+        if keys[pygame.K_SPACE]:
+            break
+
+
+def start_screen(window, info, clock):
     """
     Display starting screen
     """
@@ -29,16 +45,7 @@ def start_screen(window, info):
     pygame.display.flip()
 
     # Wait for user to start game
-    while True:
-        # Get keyboard events
-        keys = pygame.key.get_pressed()
-
-        # Handle quit event
-        handle_quit(pygame.event.get())
-
-        # Start game if SPACE is pressed
-        if keys[pygame.K_SPACE]:
-            break
+    wait(clock)
 
 
 def gameover_screen(window, info, clock):
@@ -56,19 +63,7 @@ def gameover_screen(window, info, clock):
     pygame.display.flip()
 
     # Wait for user to start game
-    while True:
-        # Clock ticks
-        clock.tick(60)
-
-        # Get keyboard events
-        keys = pygame.key.get_pressed()
-
-        # Handle quit event
-        handle_quit(pygame.event.get())
-
-        # Start game if SPACE is pressed
-        if keys[pygame.K_SPACE]:
-            break
+    wait(clock)
 
 
 def main():
@@ -99,10 +94,10 @@ def main():
             blocks.append(new_block)
 
     # Start screen
-    start_screen(window, info)
+    clock = Clock()
+    start_screen(window, info, clock)
 
     # Game main loop
-    clock = Clock()
     is_running = True
     game_over = False
     while is_running:

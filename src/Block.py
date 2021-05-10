@@ -4,7 +4,7 @@ from pygame import Rect
 
 
 class Block:
-    def __init__(self, size, left, top, screen_W, screen_H):
+    def __init__(self, size, left, top):
         """
         Block instanciation
         """

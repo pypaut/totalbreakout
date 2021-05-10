@@ -84,18 +84,17 @@ def main():
     ball = Ball(info.current_w, info.current_h)
     blocks = []
 
-    left_len = 10
-    top_len = 5
+    left_len = 20
+    top_len = 8
     ext_block_size = info.current_w // left_len
-    block_size = info.current_w // 40
-    for i in range(left_len):
-        for j in range(top_len):
+    offset = 15/100 * ext_block_size
+    block_size = ext_block_size - offset
+    for i in range(1, left_len - 1):
+        for j in range(1, top_len - 1):
             new_block = Block(
                 block_size,
-                i * ext_block_size,
-                j * ext_block_size,
-                info.current_w,
-                info.current_h,
+                i * ext_block_size + offset // 2,
+                j * ext_block_size + offset // 2,
             )
             blocks.append(new_block)
 

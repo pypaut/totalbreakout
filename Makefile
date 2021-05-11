@@ -10,5 +10,5 @@ all:
 	python3 src/main.py
 
 lint:
-	black -l 79 ${OBJS}
+	black -l 79 --quiet ${OBJS}
 	flake8 .

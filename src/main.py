@@ -53,7 +53,9 @@ def win_screen(window, info, clock):
     Display winning screen
     """
     myfont = pygame.font.SysFont("Comic Sans MS", 60)
-    textsurface = myfont.render("YOU WIN! ... PRESS SPACE TO RESTART", True, (255, 255, 255))
+    textsurface = myfont.render(
+        "YOU WIN! ... PRESS SPACE TO RESTART", True, (255, 255, 255)
+    )
     window.blit(
         textsurface,
         (info.current_w / 2 - textsurface.get_width() / 2, info.current_h / 2),

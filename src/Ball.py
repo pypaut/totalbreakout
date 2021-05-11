@@ -113,14 +113,16 @@ class Ball:
                 # Bottom left corner
                 elif (
                     self.get_center()[0] <= block.rect.left
-                    and block.rect.top + block.rect.height <= self.get_center()[1]
+                    and block.rect.top + block.rect.height
+                    <= self.get_center()[1]
                 ):
                     new_direction = Vector2(-1, 1).normalize()
 
                 # Bottom right corner
                 elif (
                     block.rect.left + block.rect.width <= self.get_center()[0]
-                    and block.rect.top + block.rect.height <= self.get_center()[1]
+                    and block.rect.top + block.rect.height
+                    <= self.get_center()[1]
                 ):
                     new_direction = Vector2(1, 1).normalize()
 

@@ -24,7 +24,7 @@ class Ball:
 
         self.radius = self.HEIGHT // 2
         self.direction = Vector2(0, 1)
-        self.speed = 0.2
+        self.speed = 0.5
 
     def get_center(self):
         """
@@ -40,7 +40,7 @@ class Ball:
         self.rect.left = self.screen_W // 2 - self.WIDTH // 2
         self.direction = Vector2(0, 1)
 
-    def move(self, player, blocks, dt):
+    def move(self, player, blocks_grid, dt):
         """
         Collision check to update direction, and update self.rect accordingly
         """
@@ -57,7 +57,7 @@ class Ball:
             self.direction.x = coeff * 1.5
 
         # Block collision
-        for block in blocks:
+        for block in blocks_grid.blocks:
             if self.rect.colliderect(block):
                 new_direction = self.direction
 
@@ -76,7 +76,6 @@ class Ball:
 
                     # Top collision
                     else:
-                        print("TOP COLLISION")
                         new_direction = Vector2(0, -1)
 
                 # Horizontal
@@ -127,7 +126,7 @@ class Ball:
                     new_direction = Vector2(1, 1).normalize()
 
                 self.direction = 2 * new_direction + self.direction
-                blocks.remove(block)
+                blocks_grid.remove_block(block)
 
         # Top wall collision check
         if self.rect.top < 1:

@@ -4,7 +4,7 @@ from pygame.locals import QUIT
 from pygame.time import Clock
 
 from Ball import Ball
-from Block import Block
+from BlocksGrid import BlocksGrid
 from Player import Player
 
 
@@ -95,21 +95,7 @@ def main():
     # Objects instanciation
     player = Player(info.current_w, info.current_h)
     ball = Ball(info.current_w, info.current_h)
-    blocks = []
-
-    left_len = 20
-    top_len = 8
-    ext_block_size = info.current_w // left_len
-    offset = 15 / 100 * ext_block_size
-    block_size = ext_block_size - offset
-    for i in range(1, left_len - 1):
-        for j in range(1, top_len - 1):
-            new_block = Block(
-                block_size,
-                i * ext_block_size + offset // 2,
-                j * ext_block_size + offset // 2,
-            )
-            blocks.append(new_block)
+    blocks_grid = BlocksGrid(info.current_w, info.current_h)
 
     # Start screen
     clock = Clock()
@@ -135,16 +121,15 @@ def main():
         player.move(keys, dt)
 
         # Ball update
-        game_over = ball.move(player, blocks, dt)
+        game_over = ball.move(player, blocks_grid, dt)
 
         # Check if win
-        if len(blocks) == 0:
+        if len(blocks_grid.blocks) == 0:
             win_screen(window, info, clock)
 
         # Draw
         window.fill((0, 0, 0))
-        for block in blocks:
-            block.draw(window)
+        blocks_grid.draw(window)
         player.draw(window)
         ball.draw(window)
         pygame.display.flip()

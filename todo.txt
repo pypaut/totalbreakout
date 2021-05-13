@@ -2,9 +2,12 @@
 
 [X] - Fix block collision at corners
 [ ] - Fix blocks placement
+[ ] - Fix horizontal direction case
+[ ] - Sometimes go through blocks
 
 # Features
 
+[ ] - Mouse controls
 [ ] - End screen
 [ ] - Start menu
 [ ] - Pause menu

@@ -1,9 +1,14 @@
 # Bugs
 
 [X] - Fix block collision at corners
-[ ] - Fix blocks placement
+[X] - Fix blocks placement
 [ ] - Fix horizontal direction case
-[ ] - Sometimes go through blocks
+[ ] - Sometimes goes through blocks
+
+# TODOs
+
+[ ] - Refactor long functions
+[ ] - Add "Breakout" class ?
 
 # Features
 

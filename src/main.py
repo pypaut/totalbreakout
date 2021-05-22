@@ -107,6 +107,7 @@ def main():
     while is_running:
         if game_over:
             gameover_screen(window, info, clock)
+            player.reset_pos()
             ball.reset_pos()
             game_over = False
 

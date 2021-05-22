@@ -14,14 +14,24 @@ class Player:
         self.screen_W = screen_W
         self.screen_H = screen_H
 
+        self.init_pos_left = screen_W // 2 - WIDTH // 2
+        self.init_pos_top = screen_H * 5 / 6
+
         self.rect = Rect(
-            screen_W // 2 - WIDTH // 2,  # left
-            screen_H * 5 / 6,  # top
+            self.init_pos_left,  # left
+            self.init_pos_top,  # top
             WIDTH,  # width
             HEIGHT,  # height
         )
 
         self.speed = 1
+
+    def reset_pos(self):
+        """
+        Reset player position to beginning
+        """
+        self.rect[0] = self.init_pos_left  # left
+        self.rect[1] = self.init_pos_top  # top
 
     def move(self, keys, dt):
         """
